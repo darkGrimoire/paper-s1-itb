@@ -7,253 +7,95 @@
 \usepackage{graphicx}
 \usepackage{textcomp}
 \usepackage{xcolor}
+\graphicspath{{resources/}}
 \def\BibTeX{{\rm B\kern-.05em{\sc i\kern-.025em b}\kern-.08em
     T\kern-.1667em\lower.7ex\hbox{E}\kern-.125emX}}
 \begin{document}
 
-\title{Development of \textit{Interactive Learning Environment} (ILE) in Programming Learning Platform KodeBareng}
+\title{Development of Code Execution Visualization as Interactive Learning Tool for Online Programming Learning Platform}
 
 \author{
   \IEEEauthorblockN{Faris Rizki Ekananda}
-  \IEEEauthorblockA{SEEI \\
-    \textit{Institut Teknologi Bandung}\\
+  \IEEEauthorblockA{\textit{School of Electrical Engineering and Informatics} \\
+    Institut Teknologi Bandung\\
     Bandung, Indonesia \\
-    13518125@std.stei.itb.ac.id}
+    faris.ekananda20@gmail.com}
   \and
-  \IEEEauthorblockN{Yudistira Dwi Wardhana Asnar}
-  \IEEEauthorblockA{SEEI \\
-    \textit{Institut Teknologi Bandung}\\
+  \IEEEauthorblockN{Yudistira Asnar}
+  \IEEEauthorblockA{\textit{School of Electrical Engineering and Informatics} \\
+    Institut Teknologi Bandung\\
     Bandung, Indonesia \\
-    yudis@informatika.org}
+    yudis@itb.ac.id}
 }
 
 \maketitle
 
 \begin{abstract}
-  This document is a model and instructions for \LaTeX.
-  This and the IEEEtran.cls file define the components of your paper [title, text, heads, etc.]. *CRITICAL: Do Not Use Symbols, Special Characters, Footnotes,
-  or Math in Paper Title or Abstract.
+  One of the challenges in learning programming for people who are new to programming is understanding how programs work. This is important because they still don't have an appropriate view of the program's working process, making it difficult for them to absorb the programming material they learn. This is made more difficult when learning is done online, because learning can take place asynchronously so that teachers must be able to ensure understanding can be achieved through learning materials without direct interaction.
+
+  One way to improve understanding in learning is by creating an interactive learning environment (ILE). In some existing online programming learning platforms, interactive learning is done by working on problems using a Web IDE such as Sololearn, understanding concepts using interactive visual animations such as Brilliant, and presenting material using interactive storytelling on Progate. However, the use of visualization of the execution of the program as an ILE is still minimally used in programming learning classes, even though based on several literature studies it can improve the understanding of programming concepts because it can generate a concrete model of computer programming in novice students.
+
+  In this paper, an ILE is built in the form of a code execution visualization tool that displays how the program works. This system is integrated with online programming classes on KodeBareng Web Platform so that it can be used in the learning process and practice problem solving. After conducting user experiments, the results show that this ILE is considered by users to be helpful in learning with an average score in the range of 4.231 and 4.385 on the likert scale, as well as increasing the average correct answer value on the questions tested with the most significant increase in concept understanding (using SOLO Level) in module 1 with a t value of 2.179 (\textit{p = 0.0147}) for students who have never learned programming before with an increase from an average SOLO Level score of 2.429 to 3.857 and in module 2 from an average SOLO Level of 3.333 to 3.6.
 \end{abstract}
 
 \begin{IEEEkeywords}
-  component, formatting, style, styling, insert
+  programming learning, interactive learning, code execution visualization
 \end{IEEEkeywords}
 
 \section{Introduction}
-This document is a model and instructions for \LaTeX.
-Please observe the conference page limits.
+The rapid development of digital technology opens up vast potential in online learning. With the help of the internet, learning can be done anywhere and anytime. Learning is no longer constrained by geographical and time boundaries so that there are more connections and interactions between teachers and students \cite{choy2004interactive,keengwe2010towards,psotka2012ile}.
 
-\section{Ease of Use}
+However, the interaction between students and teachers in online learning cannot be equated with traditional learning. Interactions such as verbally asking students questions, encouraging students to solve problems in front of the class, and similar things cannot be done in asynchronous online learning because the interaction between the student and the teacher is not done directly.
 
-\subsection{Maintaining the Integrity of the Specifications}
+One of the challenges experienced by people who are new to programming is the lack of understanding of what happens when a program executes a code \cite{mayer1981psychology, moons2013pilot}. This happens because they still don't have a proper idea of how a computer program works, which makes it difficult for them to grasp the fundamental and abstract concepts of learning programming for beginners. Online learning also makes this more difficult to overcome as there is less interaction between the student and the teacher during asynchronous learning, so the teacher has to use other tools to provide a concrete model to the student.
 
-The IEEEtran class file is used to format your paper and style the text. All margins,
-column widths, line spaces, and text fonts are prescribed; please do not
-alter them. You may note peculiarities. For example, the head margin
-measures proportionately more than is customary. This measurement
-and others are deliberate, using specifications that anticipate your paper
-as one part of the entire proceedings, and not as an independent document.
-Please do not revise any of the current designations.
+Currently, many programming learning platforms utilize interactive learning in the form of code exercises using Web IDEs, interactive visual animations, and interactive storytelling. However, these solutions cannot address the problems faced by students who have never learned programming before. An interactive environment that supports learning and practicing programming tasks is needed to solve these problems. Such a environment is aimed to improve concept understanding, make learning more interactive and facilitate the students during the learning process.
 
-\section{Prepare Your Paper Before Styling}
-Before you begin to format your paper, first write and save the content as a
-separate text file. Complete all content and organizational editing before
-formatting. Please note sections \ref{AA}--\ref{SCM} below for more information on
-proofreading, spelling and grammar.
+In this paper, we will focus on the development of a code execution visualization tool as an interactive learning environment that can support the conceptual understanding of how a program works for students who are new to programming. We will also observe the effect of the tool on the learning process of students.
 
-Keep your text and graphic files separate until after the text has been
-formatted and styled. Do not number text heads---{\LaTeX} will do that
-for you.
+\section{Literature Review}
+\subsection{Interactive Learning}
+Essentially, interactive learning is a method of learning that involves interaction between the student and the educational material, such as processing the material, completing tasks, or solving problems with the aim of building cognitive, affective, conative, and psychomotor learning outcomes. In short, there is a reciprocal action relationship between student and teacher which prevents learning from becoming passive. In the context of online learning, this can be achieved through digital technology that connects students and teachers.
 
-\subsection{Abbreviations and Acronyms}\label{AA}
-Define abbreviations and acronyms the first time they are used in the text,
-even after they have been defined in the abstract. Abbreviations such as
-IEEE, SI, MKS, CGS, ac, dc, and rms do not have to be defined. Do not use
-abbreviations in the title or heads unless they are unavoidable.
+The characteristics of interactive learning \cite{reeves2012interactive} are access to content, tasks, and problems by the students using digital technology such as computers with internet access. Furthermore, Reeves \cite{reeves2012interactive} explains that there are 2 approaches in the application of interactive learning, namely learning "through" interactive learning program and learning "with" interactive learning program. Learning "through" an interactive learning program means that the program provides the lesson in a variety of communication methods (focusing on the interactive delivery of the lesson) while learning "with" an interactive learning program utilizes cognitive tools that the student can use to build pieces of information into knowledge allowing the student to build their own familiar representational model of understanding. Learning "with" an interactive learning program is much more impactful as it facilitates critical thinking and higher-order thinking (HOT). The program or tool used in interactive learning is also referred to as an interactive learning environment (ILE).
 
-\subsection{Units}
-\begin{itemize}
-  \item Use either SI (MKS) or CGS as primary units. (SI units are encouraged.) English units may be used as secondary units (in parentheses). An exception would be the use of English units as identifiers in trade, such as ``3.5-inch disk drive''.
-  \item Avoid combining SI and CGS units, such as current in amperes and magnetic field in oersteds. This often leads to confusion because equations do not balance dimensionally. If you must use mixed units, clearly state the units for each quantity that you use in an equation.
-  \item Do not mix complete spellings and abbreviations of units: ``Wb/m\textsuperscript{2}'' or ``webers per square meter'', not ``webers/m\textsuperscript{2}''. Spell out units when they appear in text: ``. . . a few henries'', not ``. . . a few H''.
-  \item Use a zero before decimal points: ``0.25'', not ``.25''. Use ``cm\textsuperscript{3}'', not ``cc''.)
-\end{itemize}
+\subsection{Interactive Learning Environment (ILE)}
+There are various types of interactive learning environments that can support learning programming according to \cite{moons2013pilot}, such as \textit{microworlds} that use graphics like LOGO turtles or in the form of physical robots such as Lego Mindstorm Kit that use simplified programming languages, algorithm visualization tools to visualize the workflow of a specific algorithm, and code execution visualization tools that can display the flow of a program's work process when executed. Sites that offer online learning, such as \cite{sololearn2021media}, \cite{codesaya2021media}, \cite{brilliant2021media}, and learning portals of educational institutions or \textit{e-learning system} are also considered as ILEs using the first form of interactive learning approach which is " through" interactive learning because it is static.
 
-\subsection{Equations}
-Number equations consecutively. To make your
-equations more compact, you may use the solidus (~/~), the exp function, or
-appropriate exponents. Italicize Roman symbols for quantities and variables,
-but not Greek symbols. Use a long dash rather than a hyphen for a minus
-sign. Punctuate equations with commas or periods when they are part of a
-sentence, as in:
-\begin{equation}
-  a+b=\gamma\label{eq}
-\end{equation}
-
-Be sure that the
-symbols in your equation have been defined before or immediately following
-the equation. Use ``\eqref{eq}'', not ``Eq.~\eqref{eq}'' or ``equation \eqref{eq}'', except at
-the beginning of a sentence: ``Equation \eqref{eq} is . . .''
-
-\subsection{\LaTeX-Specific Advice}
-
-Please use ``soft'' (e.g., \verb|\eqref{Eq}|) cross references instead
-of ``hard'' references (e.g., \verb|(1)|). That will make it possible
-to combine sections, add equations, or change the order of figures or
-citations without having to go through the file line by line.
-
-Please don't use the \verb|{eqnarray}| equation environment. Use
-\verb|{align}| or \verb|{IEEEeqnarray}| instead. The \verb|{eqnarray}|
-environment leaves unsightly spaces around relation symbols.
-
-Please note that the \verb|{subequations}| environment in {\LaTeX}
-will increment the main equation counter even when there are no
-equation numbers displayed. If you forget that, you might write an
-article in which the equation numbers skip from (17) to (20), causing
-the copy editors to wonder if you've discovered a new method of
-counting.
-
-  {\BibTeX} does not work by magic. It doesn't get the bibliographic
-data from thin air but from .bib files. If you use {\BibTeX} to produce a
-bibliography you must send the .bib files.
-
-  {\LaTeX} can't read your mind. If you assign the same label to a
-subsubsection and a table, you might find that Table I has been cross
-referenced as Table IV-B3.
-
-{\LaTeX} does not have precognitive abilities. If you put a
-\verb|\label| command before the command that updates the counter it's
-supposed to be using, the label will pick up the last counter to be
-cross referenced instead. In particular, a \verb|\label| command
-should not go before the caption of a figure or a table.
-
-Do not use \verb|\nonumber| inside the \verb|{array}| environment. It
-will not stop equation numbers inside \verb|{array}| (there won't be
-any anyway) and it might stop a wanted equation number in the
-surrounding equation.
-
-\subsection{Some Common Mistakes}\label{SCM}
-\begin{itemize}
-  \item The word ``data'' is plural, not singular.
-  \item The subscript for the permeability of vacuum $\mu_{0}$, and other common scientific constants, is zero with subscript formatting, not a lowercase letter ``o''.
-  \item In American English, commas, semicolons, periods, question and exclamation marks are located within quotation marks only when a complete thought or name is cited, such as a title or full quotation. When quotation marks are used, instead of a bold or italic typeface, to highlight a word or phrase, punctuation should appear outside of the quotation marks. A parenthetical phrase or statement at the end of a sentence is punctuated outside of the closing parenthesis (like this). (A parenthetical sentence is punctuated within the parentheses.)
-  \item A graph within a graph is an ``inset'', not an ``insert''. The word alternatively is preferred to the word ``alternately'' (unless you really mean something that alternates).
-  \item Do not use the word ``essentially'' to mean ``approximately'' or ``effectively''.
-  \item In your paper title, if the words ``that uses'' can accurately replace the word ``using'', capitalize the ``u''; if not, keep using lower-cased.
-  \item Be aware of the different meanings of the homophones ``affect'' and ``effect'', ``complement'' and ``compliment'', ``discreet'' and ``discrete'', ``principal'' and ``principle''.
-  \item Do not confuse ``imply'' and ``infer''.
-  \item The prefix ``non'' is not a word; it should be joined to the word it modifies, usually without a hyphen.
-  \item There is no period after the ``et'' in the Latin abbreviation ``et al.''.
-  \item The abbreviation ``i.e.'' means ``that is'', and the abbreviation ``e.g.'' means ``for example''.
-\end{itemize}
-An excellent style manual for science writers is \cite{b7}.
-
-\subsection{Authors and Affiliations}
-\textbf{The class file is designed for, but not limited to, six authors.} A
-minimum of one author is required for all conference articles. Author names
-should be listed starting from left to right and then moving down to the
-next line. This is the author sequence that will be used in future citations
-and by indexing services. Names should not be listed in columns nor group by
-affiliation. Please keep your affiliations as succinct as possible (for
-example, do not differentiate among departments of the same organization).
-
-\subsection{Identify the Headings}
-Headings, or heads, are organizational devices that guide the reader through
-your paper. There are two types: component heads and text heads.
-
-Component heads identify the different components of your paper and are not
-topically subordinate to each other. Examples include Acknowledgments and
-References and, for these, the correct style to use is ``Heading 5''. Use
-``figure caption'' for your Figure captions, and ``table head'' for your
-table title. Run-in heads, such as ``Abstract'', will require you to apply a
-style (in this case, italic) in addition to the style provided by the drop
-down menu to differentiate the head from the text.
-
-Text heads organize the topics on a relational, hierarchical basis. For
-example, the paper title is the primary text head because all subsequent
-material relates and elaborates on this one topic. If there are two or more
-sub-topics, the next level head (uppercase Roman numerals) should be used
-and, conversely, if there are not at least two sub-topics, then no subheads
-should be introduced.
-
-\subsection{Figures and Tables}
-\paragraph{Positioning Figures and Tables} Place figures and tables at the top and
-bottom of columns. Avoid placing them in the middle of columns. Large
-figures and tables may span across both columns. Figure captions should be
-below the figures; table heads should appear above the tables. Insert
-figures and tables after they are cited in the text. Use the abbreviation
-``Fig.~\ref{fig}'', even at the beginning of a sentence.
-
-\begin{table}[htbp]
-  \caption{Table Type Styles}
-  \begin{center}
-    \begin{tabular}{|c|c|c|c|}
-      \hline
-      \textbf{Table} & \multicolumn{3}{|c|}{\textbf{Table Column Head}}                                                         \\
-      \cline{2-4}
-      \textbf{Head}  & \textbf{\textit{Table column subhead}}           & \textbf{\textit{Subhead}} & \textbf{\textit{Subhead}} \\
-      \hline
-      copy           & More table copy$^{\mathrm{a}}$                   &                           &                           \\
-      \hline
-      \multicolumn{4}{l}{$^{\mathrm{a}}$Sample of a Table footnote.}
-    \end{tabular}
-    \label{tab1}
-  \end{center}
-\end{table}
+One form of ILE used in learning programming is a web-based integrated development environment (IDE) (hereafter referred to as Web IDE), which allows programming learners to write code and run it. This is because Web IDEs allow users to directly implement code without having to do any setup first. The Web IDE can also ensure that the program execution environment will always be the same between one user and another, and increase portability because it can be done anytime and anywhere \cite{tran2013interactive}. These ILEs can be integrated with program execution visualization tools so as to improve learners' understanding of programming concepts \cite{moons2013pilot}. Such ILEs fall under the second interactive learning approach of "with" interactive learning as they provide tools that users can use to explore further. Examples of ILEs in the form of code execution visualizations can be seen in \ref{fig:pythontutor} and \ref{fig:evizor}
 
 \begin{figure}[htbp]
-  \centerline{\includegraphics{fig1.png}}
-  \caption{Example of a figure caption.}
-  \label{fig}
+  \centerline{\includegraphics[width=\linewidth]{chapter2/pythontutor.png}}
+  \caption{Code Execution Visualization in Python Tutor} \label{fig:pythontutor}
 \end{figure}
 
-Figure Labels: Use 8 point Times New Roman for Figure labels. Use words
-rather than symbols or abbreviations when writing Figure axis labels to
-avoid confusing the reader. As an example, write the quantity
-``Magnetization'', or ``Magnetization, M'', not just ``M''. If including
-units in the label, present them within parentheses. Do not label axes only
-with units. In the example, write ``Magnetization (A/m)'' or ``Magnetization
-\{A[m(1)]\}'', not just ``A/m''. Do not label axes with a ratio of
-quantities and units. For example, write ``Temperature (K)'', not
-``Temperature/K''.
+\begin{figure}[htbp]
+  \centerline{\includegraphics[width=\linewidth]{chapter2/evizor.png}}
+  \caption{Code Execution Visualization in EVIZOR} \label{fig:evizor}
+\end{figure}
 
-\section*{Acknowledgment}
+\section{Related Works}
 
-The preferred spelling of the word ``acknowledgment'' in America is without
-an ``e'' after the ``g''. Avoid the stilted expression ``one of us (R. B.
-G.) thanks $\ldots$''. Instead, try ``R. B. G. thanks$\ldots$''. Put sponsor
-acknowledgments in the unnumbered footnote on the first page.
+\section{Analysis and Design}
+\subsection{Code Execution Visualization}
+\subsection{Functional Requirement}
+\subsection{Nonfunctional Requirement}
+\subsection{Component Diagram}
+\subsection{Stack Trace Processing}
+\subsection{Visualizer}
 
-\section*{References}
+\section{Implementation and Testing}
+\subsection{Python Debugger}
+\subsection{Implementation}
+\subsection{Alpha Testing}
+\subsection{User Experiment}
+\subsection{Experiment Results}
 
-Please number citations consecutively within brackets \cite{b1}. The
-sentence punctuation follows the bracket \cite{b2}. Refer simply to the reference
-number, as in \cite{b3}---do not use ``Ref. \cite{b3}'' or ``reference \cite{b3}'' except at
-the beginning of a sentence: ``Reference \cite{b3} was the first $\ldots$''
+\section{Conclusion and Future Work}
 
-Number footnotes separately in superscripts. Place the actual footnote at
-the bottom of the column in which it was cited. Do not put footnotes in the
-abstract or reference list. Use letters for table footnotes.
+\bibliographystyle{IEEEtran}
+\bibliography{IEEEabrv,IEEE}
 
-Unless there are six authors or more give all authors' names; do not use
-``et al.''. Papers that have not been published, even if they have been
-submitted for publication, should be cited as ``unpublished'' \cite{b4}. Papers
-that have been accepted for publication should be cited as ``in press'' \cite{b5}.
-Capitalize only the first word in a paper title, except for proper nouns and
-element symbols.
-
-For papers published in translation journals, please give the English
-citation first, followed by the original foreign-language citation \cite{b6}.
-
-\begin{thebibliography}{00}
-  \bibitem{b1} G. Eason, B. Noble, and I. N. Sneddon, ``On certain integrals of Lipschitz-Hankel type involving products of Bessel functions,'' Phil. Trans. Roy. Soc. London, vol. A247, pp. 529--551, April 1955.
-  \bibitem{b2} J. Clerk Maxwell, A Treatise on Electricity and Magnetism, 3rd ed., vol. 2. Oxford: Clarendon, 1892, pp.68--73.
-  \bibitem{b3} I. S. Jacobs and C. P. Bean, ``Fine particles, thin films and exchange anisotropy,'' in Magnetism, vol. III, G. T. Rado and H. Suhl, Eds. New York: Academic, 1963, pp. 271--350.
-  \bibitem{b4} K. Elissa, ``Title of paper if known,'' unpublished.
-  \bibitem{b5} R. Nicole, ``Title of paper with only first word capitalized,'' J. Name Stand. Abbrev., in press.
-  \bibitem{b6} Y. Yorozu, M. Hirano, K. Oka, and Y. Tagawa, ``Electron spectroscopy studies on magneto-optical media and plastic substrate interface,'' IEEE Transl. J. Magn. Japan, vol. 2, pp. 740--741, August 1987 [Digests 9th Annual Conf. Magnetics Japan, p. 301, 1982].
-  \bibitem{b7} M. Young, The Technical Writer's Handbook. Mill Valley, CA: University Science, 1989.
-\end{thebibliography}
 \vspace{12pt}
 
 \end{document}
